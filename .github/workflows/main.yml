@@ -17,6 +17,8 @@ jobs:
           binadox-secret-token: '${{ secrets.BINADOX_TOKEN }}'
           binadox-server-url: 'https://httpbin.org/post'
           binadox-project-name: 'zopa'
+          github-event-name: '${{ github.event_name }}'
+          github-event-action: '${{ github.event.action }}'
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "status ${{ steps.binadox-tester.outputs.status }}"
