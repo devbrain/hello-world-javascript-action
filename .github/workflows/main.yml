@@ -10,11 +10,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Hello world action step
+      - name: test step
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: binadox-tester
         with:
-          who-to-greet: '${{ secrets.BINADOX_TOKEN }}'
+          binadox-secret-token: '${{ secrets.BINADOX_TOKEN }}'
+          binadox-server-url: 'https://httpbin.org/post'
+          binadox-project-name: 'zopa'
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "status ${{ steps.binadox-tester.outputs.status }}"
