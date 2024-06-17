@@ -2,20 +2,20 @@ name: 'Binadox Infrastructure-As-Code analyzer'
 description: 'Analyze your Infrastructure-As-Code'
 inputs:
   binadox-server-url:  # id of input
-    description: 'binadox server url'
+    description: 'Binadox server url'
     required: true
     default: 'https://httpbin.org/post'
   binadox-project-name:
-    description: 'project name'
+    description: 'project name as defined at Binadox'
     required: true
     default: 'my-project'
   binadox-secret-token:
-    description: 'binadox secret token'
+    description: 'Binadox secret token'
     required: true
     default: 'XXXX'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  status: 
+    description: 'Status of request to Binadox'
 runs:
   using: 'node20'
   main: 'index.js'
