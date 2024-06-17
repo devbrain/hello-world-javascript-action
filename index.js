@@ -8,11 +8,7 @@ async function sendToBinadox(token, project) {
     var post_data = querystring.stringify({
         'project': project
     });
-
-    // post the data
-    post_req.write(post_data);
-    post_req.end();
-
+   
     const res = await fetch('https://httpbin.org/post',{
         method: 'POST',
         headers: {
