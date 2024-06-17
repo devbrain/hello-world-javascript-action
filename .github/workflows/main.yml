@@ -14,7 +14,7 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          who-to-greet: 'binadox'
+          who-to-greet: '${{ secrets.BINADOX_TOKEN }}'
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
