@@ -15,8 +15,13 @@ async function sendToBinadox(url, token, project) {
             'project': project
         })
     })
-    console.log('RES = ', res)
-    return res
+    
+    if (res.ok) {
+        core.setOutput("status", "Request sent");
+      } else {
+        core.setFailed("Request failed: status = " + res.status + ", " + res.statusText);
+      }
+    
 }
 
 try {
@@ -25,13 +30,8 @@ try {
   const binadoxToken = core.getInput('binadox-secret-token');
   const binadoxProject = core.getInput('binadox-project-name');
 
-  const res = sendToBinadox(binadoxServerUrl, binadoxToken, binadoxProject)  
-  if (res.ok) {
-    core.setOutput("status", "Request sent");
-  } else {
-    core.setFailed("Request failed: status = " + res.status + ", " + res.statusText);
-  }
-
+  sendToBinadox(binadoxServerUrl, binadoxToken, binadoxProject)  
+  
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
