@@ -15,6 +15,7 @@ async function sendToBinadox(url, token, project) {
             'project': project
         })
     })
+    console.log('RES = ', res)
     return res
 }
 
