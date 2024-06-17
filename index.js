@@ -25,7 +25,12 @@ async function sendToBinadox(url, token, project) {
 }
 
 try {
-  // `who-to-greet` input defined in action metadata file
+  
+  const githubEventName =  core.getInput('github-event-name'); 
+  const githubEventAction =  core.getInput('github-event-action'); 
+
+  console.log('NAME:', githubEventName, 'ACTION:', githubEventAction)
+
   const binadoxServerUrl = core.getInput('binadox-server-url');
   const binadoxToken = core.getInput('binadox-secret-token');
   const binadoxProject = core.getInput('binadox-project-name');
