@@ -24,11 +24,6 @@ try {
   const binadoxToken = core.getInput('binadox-secret-token');
   const binadoxProject = core.getInput('binadox-project-name');
 
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
-
-
   const res = sendToBinadox(binadoxServerUrl, binadoxToken, binadoxProject)  
   if (res.ok) {
     core.setOutput("status", "Request sent");
