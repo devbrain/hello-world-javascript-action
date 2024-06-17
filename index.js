@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const querystring = require('querystring');
 const http = require('https');
 
-function sendToBinadox(token, project) {
+async function sendToBinadox(token, project) {
     
     var post_data = querystring.stringify({
         'project': project
