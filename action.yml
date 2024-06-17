@@ -13,14 +13,6 @@ inputs:
     description: 'Binadox secret token'
     required: true
     default: 'XXXX'
-  github-event-name:
-    description: 'github-event-name'
-    required: true
-    default: ''
-  github-event-action:
-    description: 'github-event-name'
-    required: true
-    default: ''  
 outputs:
   status: 
     description: 'Status of request to Binadox'

@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const querystring = require('querystring');
 
 
-async function sendToBinadox(url, token, project) {
+async function sendToBinadox(url, token, data) {
   
     const res = await fetch(url ,{
         method: 'POST',
@@ -11,9 +11,7 @@ async function sendToBinadox(url, token, project) {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization' : 'Bearer ' + token,
         },
-        body: querystring.stringify({
-            'project': project
-        })
+        body: querystring.stringify(data)
     })
     
     if (res.ok) {
@@ -26,20 +24,17 @@ async function sendToBinadox(url, token, project) {
 
 try {
   
-  const githubEventName =  core.getInput('github-event-name'); 
-  const githubEventAction =  core.getInput('github-event-action'); 
-
-  console.log('NAME:', githubEventName, 'ACTION:', githubEventAction)
-
   const binadoxServerUrl = core.getInput('binadox-server-url');
   const binadoxToken = core.getInput('binadox-secret-token');
   const binadoxProject = core.getInput('binadox-project-name');
 
-  sendToBinadox(binadoxServerUrl, binadoxToken, binadoxProject)  
+  const data = {
+    'project': binadoxProject,
+    'github_data': github.context
+  }
+
+  sendToBinadox(binadoxServerUrl, binadoxToken, data)  
   
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
 }
