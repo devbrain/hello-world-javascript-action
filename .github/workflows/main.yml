@@ -7,9 +7,9 @@ jobs:
     steps:
       # To use this repository's private action,
       # you must check out the repository
-      - name: binadox
-        uses: devbrain/hello-world-javascript-action@v1.2
-
+      - name: Checkout
+        uses: actions/checkout@v4
+      
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
         id: hello
