@@ -27,6 +27,9 @@ function sendToBinadox(token, project) {
         res.on('data', function (chunk) {
             console.log('Response: ' + chunk);
         });
+        res.on("error", function (error) {
+            console.error('ERROR :' + error.status);
+        });
     });
 
     // post the data
