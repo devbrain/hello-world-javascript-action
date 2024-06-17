@@ -13,7 +13,7 @@ async function sendToBinadox(token, project) {
     post_req.write(post_data);
     post_req.end();
 
-    return fetch('https://httpbin.org/post',{
+    const res = await fetch('https://httpbin.org/post',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -21,6 +21,13 @@ async function sendToBinadox(token, project) {
         },
         body:post_data
     })
+
+    if(res.ok){
+        const result =await res.json()
+        console.log('response', result)
+      } else{
+        console.log('ne ok response',res.status, res.statusText)
+      }
 }
 
 try {
@@ -32,14 +39,9 @@ try {
 
 
 
-  const res = await sendToBinadox(nameToGreet, "XXXX");
+  sendToBinadox(nameToGreet, "XXXX");
   
-  if(res.ok){
-    const result =await res.json()
-    console.log('response', result)
-  } else{
-    console.log('ne ok response',res.status, res.statusText)
-  }
+  
 
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
